@@ -18,7 +18,7 @@ ARGF.each do |line|
     x.each { |c| h[c] = h[c].nil? ? 1 : h[c] + 1 }
 
     # decrement counter accordingly with the elements of the second half
-    y.each { |c| (h[c].nil? || h[c] == 0) ? count += 1 : (h[c] -= 1 || next) }
+    y.each { |c| (h[c].nil? || h[c] == 0) ? count += 1 : h[c] -= 1 }
     puts count
   end
 end
