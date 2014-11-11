@@ -9,7 +9,7 @@ ARGF.each do |line|
     puts -1
   else
     # splitting
-    x, y = line[0..(line.length / 2) - 1].split(//), line[line.length / 2..line.length - 1].split(//)
+    x, y = line[0..(line.length / 2) - 1].split(//), line[line.length / 2..-1].split(//)
 
     h = {}
     count = 0
