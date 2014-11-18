@@ -8,13 +8,6 @@ def binary_search(arr, num)
   -1
 end
 
-puts binary_search [1, 2, 3, 6, 7, 8], 0
-puts binary_search [1, 2, 3, 6, 7, 8], 1
-puts binary_search [1, 2, 3, 6, 7, 8], 2
-puts binary_search [1, 2, 3, 6, 7, 8], 3
-puts binary_search [1, 2, 3, 6, 7, 8], 4
-puts binary_search [1, 2, 3, 6, 7, 8], 5
-puts binary_search [1, 2, 3, 6, 7, 8], 6
-puts binary_search [1, 2, 3, 6, 7, 8], 7
-puts binary_search [1, 2, 3, 6, 7, 8], 8
-puts binary_search [1, 2, 3, 6, 7, 8], 9
+(-1..10).to_a.each do |num|
+  p binary_search [1, 2, 3, 6, 7, 8], num
+end
