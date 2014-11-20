@@ -5,14 +5,11 @@ def get_offending_index(str)
              else
                str[(str.length / 2)..-1].reverse
              end
-  
   while !stack.empty?
     x = stack.pop
     y = to_check.pop
     next if x == y
   end
-
-
   -1
 end
 
