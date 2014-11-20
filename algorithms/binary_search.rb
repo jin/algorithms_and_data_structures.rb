@@ -1,6 +1,6 @@
 def binary_search(arr, num)
   min, max = 0, arr.length - 1
-  while min <= max
+  until min > max
     mid = (min + max) / 2
     return mid if arr[mid] == num
     min, max = arr[mid] < num ? [mid + 1, max] : [min, mid - 1]
