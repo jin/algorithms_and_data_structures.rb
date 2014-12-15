@@ -7,6 +7,5 @@ gets.to_i.times do
   stones.times do |i|
     guesses << a * i + b * (stones - i - 1)
   end
-  guesses.uniq.each { |g| print "#{g} " }
-  puts
+  puts guesses.uniq.join(' ')
 end
