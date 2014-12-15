@@ -2,10 +2,11 @@
 
 gets.to_i.times do
   stones, a, b = gets.to_i, gets.to_i, gets.to_i
+  a, b = b, a if b > a
   guesses = []
   stones.times do |i|
     guesses << a * i + b * (stones - i - 1)
   end
-  guesses.uniq.sort.each { |g| print "#{g} " }
+  guesses.uniq.each { |g| print "#{g} " }
   puts
 end
