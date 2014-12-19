@@ -4,7 +4,7 @@
 
 class UndirectedGraph
 
-  attr_accessor :adjacency_list
+  attr_reader :adjacency_list
 
   def initialize
     @adjacency_list = [ [] ]
@@ -49,12 +49,12 @@ class UndirectedGraph
 end
 
 graph = UndirectedGraph.new
-graph # => #<UndirectedGraph:0x007ff9b0a2a358 @adjacency_list=[[]]>
+graph # => #<UndirectedGraph:0x007fa15a16e308 @adjacency_list=[[]]>
 
 edges = [ [0, 8], [8, 7], [7, 6], [5, 6], [2, 5], [2, 4], [1, 4], [1, 3], [0, 1] ]
 edges.each { |edge| graph.add_edge edge[0], edge[1] }
 
-graph # => #<UndirectedGraph:0x007ff9b0a2a358 @adjacency_list=[[8, 1], [4, 3, 0], [5, 4], [1], [2, 1], [6, 2], [7, 5], [8, 6], [0, 7]]>
+graph # => #<UndirectedGraph:0x007fa15a16e308 @adjacency_list=[[8, 1], [4, 3, 0], [5, 4], [1], [2, 1], [6, 2], [7, 5], [8, 6], [0, 7]]>
 graph.vertice_count # => 9
 graph.depth_first_traversal # => [0, 1, 3, 4, 2, 5, 6, 7, 8]
 graph.breadth_first_traversal # => [0, 8, 1, 7, 4, 3, 6, 2, 5]
