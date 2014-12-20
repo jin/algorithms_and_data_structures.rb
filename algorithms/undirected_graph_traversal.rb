@@ -24,6 +24,10 @@ class UndirectedGraph
     @adjacency_list.flatten.uniq.count
   end
 
+  def edge_count
+    @adjacency_list.flatten.count / 2
+  end
+
   def depth_first_traversal(vertice = 0, stack = [], visited = [], result = [])
     unless visited[vertice]
       result.push(vertice) # Add current vertice to the traversal result
@@ -49,12 +53,13 @@ class UndirectedGraph
 end
 
 graph = UndirectedGraph.new
-graph # => #<UndirectedGraph:0x007fa15a16e308 @adjacency_list=[[]]>
+graph # => #<UndirectedGraph:0x007f839a1ecd30 @adjacency_list=[[]]>
 
-edges = [ [0, 8], [8, 7], [7, 6], [5, 6], [2, 5], [2, 4], [1, 4], [1, 3], [0, 1] ]
+edges = [ [0, 8], [8, 7], [7, 6], [5, 6], [2, 5], [2, 4], [1, 4], [1, 3], [0, 1], [5, 8], [6, 1] ]
 edges.each { |edge| graph.add_edge edge[0], edge[1] }
 
-graph # => #<UndirectedGraph:0x007fa15a16e308 @adjacency_list=[[8, 1], [4, 3, 0], [5, 4], [1], [2, 1], [6, 2], [7, 5], [8, 6], [0, 7]]>
+graph # => #<UndirectedGraph:0x007f839a1ecd30 @adjacency_list=[[8, 1], [4, 3, 0, 6], [5, 4], [1], [2, 1], [6, 2, 8], [7, 5, 1], [8, 6], [0, 7, 5]]>
 graph.vertice_count # => 9
-graph.depth_first_traversal # => [0, 1, 3, 4, 2, 5, 6, 7, 8]
-graph.breadth_first_traversal # => [0, 8, 1, 7, 4, 3, 6, 2, 5]
+graph.edge_count # => 11
+graph.depth_first_traversal # => [0, 1, 6, 5, 8, 7, 2, 4, 3]
+graph.breadth_first_traversal # => [0, 8, 1, 7, 5, 4, 3, 6, 2]
