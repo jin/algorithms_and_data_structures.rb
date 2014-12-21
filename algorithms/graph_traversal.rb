@@ -57,14 +57,34 @@ class UndirectedGraph
 
 end
 
-graph = UndirectedGraph.new
-graph # => #<UndirectedGraph:0x007fc73c1d0c30 @adjacency_list=[[]]>
+class DirectedGraph < UndirectedGraph
+
+  def add_edge(v1, v2)
+    @adjacency_list[v1].nil? ? @adjacency_list[v1] = [v2] : @adjacency_list[v1].push(v2)
+  end
+
+  def vertice_count 
+    # TODO
+  end
+
+end
+
+undirected_graph = UndirectedGraph.new
+undirected_graph # => #<UndirectedGraph:0x007fa233052ad0 @adjacency_list=[[]]>
 
 edges = [ [0, 8], [8, 7], [7, 6], [5, 6], [2, 5], [2, 4], [1, 4], [1, 3], [0, 1], [5, 8], [6, 1] ]
-edges.each { |edge| graph.add_edge edge[0], edge[1] }
+edges.each { |edge| undirected_graph.add_edge edge[0], edge[1] }
 
-graph # => #<UndirectedGraph:0x007fc73c1d0c30 @adjacency_list=[[8, 1], [4, 3, 0, 6], [5, 4], [1], [2, 1], [6, 2, 8], [7, 5, 1], [8, 6], [0, 7, 5]]>
-graph.vertice_count # => 9
-graph.edge_count # => 11
-graph.depth_first_traversal # => [0, 1, 6, 5, 8, 7, 2, 4, 3]
-graph.breadth_first_traversal # => [0, 8, 1, 7, 5, 4, 3, 6, 2]
+undirected_graph # => #<UndirectedGraph:0x007fa233052ad0 @adjacency_list=[[8, 1], [4, 3, 0, 6], [5, 4], [1], [2, 1], [6, 2, 8], [7, 5, 1], [8, 6], [0, 7, 5]]>
+undirected_graph.vertice_count # => 9
+undirected_graph.edge_count # => 11
+undirected_graph.depth_first_traversal # => [0, 1, 6, 5, 8, 7, 2, 4, 3]
+undirected_graph.breadth_first_traversal # => [0, 8, 1, 7, 5, 4, 3, 6, 2]
+
+directed_graph = DirectedGraph.new
+directed_graph # => #<DirectedGraph:0x007fa233050398 @adjacency_list=[[]]>
+edges = [ [0, 8], [8, 7], [7, 6], [5, 6], [2, 5], [2, 4], [1, 4], [1, 3], [0, 1], [5, 8], [6, 1] ]
+edges.each { |edge| directed_graph.add_edge edge[0], edge[1] }
+directed_graph # => #<DirectedGraph:0x007fa233050398 @adjacency_list=[[8, 1], [4, 3], [5, 4], nil, nil, [6, 8], [1], [6], [7]]>
+directed_graph.edge_count # => 6
+directed_graph.vertice_count # => nil
