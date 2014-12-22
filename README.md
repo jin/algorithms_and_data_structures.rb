@@ -1,7 +1,7 @@
 # Algorithms & Data Structure implementations in Ruby.
 
 Fascinated and curious about Ruby's expressiveness, this repository contains
-implementations of fundamental CS concepts with it along with miscellaneous 
+my implementations of fundamental CS concepts along with miscellaneous 
 HackerRank solutions.
 
 ## Inline evaluation
