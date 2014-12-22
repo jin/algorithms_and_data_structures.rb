@@ -24,6 +24,7 @@ class UndirectedGraph
     @adjacency_list.flatten.uniq.count
   end
 
+  # Handshake Lemma. The number of edges in a graph is equals to half of the sum of degrees of all vertices.
   def edge_count
     @adjacency_list.flatten.count / 2
   end
