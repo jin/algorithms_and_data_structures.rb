@@ -1,4 +1,4 @@
-# This compares the runtime of Array#<<, Array#push and Array#+
+# This compares the runtime of Array#<<, Array#push, Array#+ and Array#concat
 require 'benchmark'
 
 def test_ltlt
