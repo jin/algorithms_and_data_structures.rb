@@ -18,3 +18,7 @@ This is accomplished with the amazing
 [vim-ruby-xmpfilter](https://github.com/t9md/vim-ruby-xmpfilter). More
 information
 [here](http://commandercoriander.net/blog/2012/10/10/evaluate-lines-of-ruby-in-vim/).
+
+## Benchmark gem
+
+The comparison-benchmark scripts use `benchmark-bigo` addon gem for the `benchmark` stdlb. It requires `gnuplot` to be installed to generate terminal graphs.
