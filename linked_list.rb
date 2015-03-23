@@ -1,4 +1,4 @@
-class LinkedList 
+class DoublyLinkedList
 
   attr_accessor :root, :last
 
@@ -7,8 +7,8 @@ class LinkedList
     @last = nil
   end
 
-  def append(value)
-    if @root.nil? 
+  def append!(value)
+    if @root.nil?
       @root = Node.new(value)
       @last = @root
     else
@@ -22,17 +22,69 @@ class LinkedList
   def length
     node = @root
     len = 0
-    unless node.nil?
-      until node.next.nil?
-        len += 1
-        node = node.next
-      end
+    until node.nil?
+      len += 1
+      node = node.next
     end
     return len
   end
 
-  def to_s
+  def [] x
+    node = @root
+    until node.nil? || x == 0
+      x -= 1
+      node = node.next
+    end
 
+    if x == 0
+      node.value
+    else
+      raise IndexError
+    end
+  end
+
+  def to_s
+    node = @root
+    count = 0
+    str = "["
+    until count >= length
+      str += " " if count > 0
+      str += "#{node.value},"
+      node = node.next
+      count += 1
+    end
+
+    str[-1] = "]"
+    return str
+  end
+
+  def remove_at_index! idx
+    node = @root
+    curr = 0
+    removed = false
+    until node.nil?
+      if curr == idx
+        node.prev.nil? ? @root = node.next : node.prev.next = node.next
+        node.next.nil? ? @last = node.prev : node.next.prev = node.prev
+        removed = true
+        break
+      end
+
+      curr += 1
+      node = node.next
+    end
+
+    raise IndexError unless removed
+  end
+
+  def reverse!
+    node = @root
+    until node.nil?
+      node.next, node.prev = node.prev, node.next
+      node = node.prev
+    end
+
+    @root, @last = @last, @root
   end
 
 end
@@ -42,15 +94,21 @@ class Node
   attr_accessor :prev, :next, :value
 
   def initialize(value)
-    @prev = nil 
+    @prev = nil
     @next = nil
     @value = value
   end
 
 end
 
-ll = LinkedList.new
+dll = DoublyLinkedList.new
 0.upto(10).each do |x|
-  ll.append(x)
+  dll.append!(x)
 end
-# >> #<LinkedList:0x007fcc1a071938 @root=#<Node:0x007fcc1a071898 @prev=nil, @next=#<Node:0x007fcc1a071870 @prev=#<Node:0x007fcc1a071898 ...>, @next=#<Node:0x007fcc1a071848 @prev=#<Node:0x007fcc1a071870 ...>, @next=#<Node:0x007fcc1a071820 @prev=#<Node:0x007fcc1a071848 ...>, @next=#<Node:0x007fcc1a0717f8 @prev=#<Node:0x007fcc1a071820 ...>, @next=#<Node:0x007fcc1a0717d0 @prev=#<Node:0x007fcc1a0717f8 ...>, @next=#<Node:0x007fcc1a0717a8 @prev=#<Node:0x007fcc1a0717d0 ...>, @next=#<Node:0x007fcc1a071780 @prev=#<Node:0x007fcc1a0717a8 ...>, @next=#<Node:0x007fcc1a071758 @prev=#<Node:0x007fcc1a071780 ...>, @next=#<Node:0x007fcc1a071730 @prev=#<Node:0x007fcc1a071758 ...>, @next=#<Node:0x007fcc1a071708 @prev=#<Node:0x007fcc1a071730 ...>, @next=nil, @value=10>, @value=9>, @value=8>, @value=7>, @value=6>, @value=5>, @value=4>, @value=3>, @value=2>, @value=1>, @value=0>, @last=#<Node:0x007fcc1a071708 @prev=#<Node:0x007fcc1a071730 @prev=#<Node:0x007fcc1a071758 @prev=#<Node:0x007fcc1a071780 @prev=#<Node:0x007fcc1a0717a8 @prev=#<Node:0x007fcc1a0717d0 @prev=#<Node:0x007fcc1a0717f8 @prev=#<Node:0x007fcc1a071820 @prev=#<Node:0x007fcc1a071848 @prev=#<Node:0x007fcc1a071870 @prev=#<Node:0x007fcc1a071898 @prev=nil, @next=#<Node:0x007fcc1a071870 ...>, @value=0>, @next=#<Node:0x007fcc1a071848 ...>, @value=1>, @next=#<Node:0x007fcc1a071820 ...>, @value=2>, @next=#<Node:0x007fcc1a0717f8 ...>, @value=3>, @next=#<Node:0x007fcc1a0717d0 ...>, @value=4>, @next=#<Node:0x007fcc1a0717a8 ...>, @value=5>, @next=#<Node:0x007fcc1a071780 ...>, @value=6>, @next=#<Node:0x007fcc1a071758 ...>, @value=7>, @next=#<Node:0x007fcc1a071730 ...>, @value=8>, @next=#<Node:0x007fcc1a071708 ...>, @value=9>, @next=nil, @value=10>>
+dll.length # => 11
+dll[10]
+dll.to_s # => "[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]"
+dll.remove_at_index! 3
+dll.to_s # => "[0, 1, 2, 4, 5, 6, 7, 8, 9, 10]"
+dll.reverse!
+dll.to_s # => "[10, 9, 8, 7, 6, 5, 4, 2, 1, 0]"
